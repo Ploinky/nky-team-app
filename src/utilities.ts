@@ -49,6 +49,7 @@ export interface PlayerStats {
     totalDamageToChampions: number
     damageShare: number
     efficiency: number
+    nexusTakedowns: number
 }
 export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID): PlayerStats {
     const pms = matches.flatMap(m => m.matchData.info.participants).filter(mp => mp.puuid === playerId)
@@ -67,6 +68,7 @@ export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID): Pl
         totalDamageToChampions: pms.map(pm => pm.totalDamageDealtToChampions).reduce(collect),
         damageShare: Math.round(pms.map(pm => pm.challenges.teamDamagePercentage).reduce(collect) / pms.length * 100) ,
         efficiency: 0,
+        nexusTakedowns: pms.map(pm => pm.nexusKills).reduce(collect)
     }
     stats.kda = round((stats.totalKills + stats.totalAssists) / stats.totalDeaths)
     stats.efficiency = round(stats.totalDamageToChampions / stats.totalGold)

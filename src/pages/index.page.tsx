@@ -57,6 +57,7 @@ export function IndexPage(c: Context) {
           {header: "GPM", fun: (s) => "" + s.goldPerMinute},
           {header: "Efficiency", fun: (s) => "" + s.efficiency},
           {header: "VSM", fun: (s) => "" + s.visionScorePerMinute},
+          {header: "NS", fun: (s) => "" + s.nexusTakedowns}
         ]}
         values={stats.sort((a, b) => b.gamesPlayed - a.gamesPlayed)}
         rowLink={(t) => "/players/" + t.puuid}

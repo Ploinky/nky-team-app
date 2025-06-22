@@ -8,7 +8,6 @@ import { Card } from "@/components/Card"
 import { css } from "hono/css"
 import { Match } from "../../global"
 import { spring2025Split } from "../../data/2025spring/split"
-import { html } from "hono/html"
 
 const cardGrid = css`
   display: grid;
@@ -16,9 +15,9 @@ const cardGrid = css`
   grid-gap: 1rem;
 `
 export function IndexPage(c: Context) {
-  const stats: Array<PlayerStats & {name: string}> = oinky_players.map((p) => {
+  const stats: Array<PlayerStats & {name: string, puuid: string}> = oinky_players.map((p) => {
     const stats = getPlayerStatsFromMatches(splits.flatMap(s => s.matches), p.puuid)
-    return {name: p.name, ...stats}
+    return {name: p.name, puuid: p.puuid, ...stats}
   })
 
   const oinkyMatches = getOinkyMatchParticipationFromSplits(splits)
@@ -46,7 +45,7 @@ export function IndexPage(c: Context) {
         rowLink={(t) => "/matches/" + t.matchData.metadata.matchId}
       />
       <h2>Players</h2>
-      <Table<PlayerStats & {name: string}>
+      <Table<PlayerStats & {name: string, puuid: string}>
         columns={[
           {header: "Name", fun: (s) => s.name},
           {header: "GP", fun: (s) => "" + s.gamesPlayed},
@@ -60,6 +59,7 @@ export function IndexPage(c: Context) {
           {header: "VSM", fun: (s) => "" + s.visionScorePerMinute},
         ]}
         values={stats.sort((a, b) => b.gamesPlayed - a.gamesPlayed)}
+        rowLink={(t) => "/players/" + t.puuid}
       />
       <h2>Highlights</h2>
       <div class={cardGrid}>

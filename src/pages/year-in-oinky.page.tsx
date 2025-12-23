@@ -6,13 +6,13 @@ import { Card } from "@/components/Card";
 import { css } from "hono/css";
 
 const cardGrid = css`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
 
-  @media (max-width: 879px) {
-        grid-template-columns: 1fr;
-    }
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export function YearInOinkyPage(c: Context) {
@@ -32,15 +32,15 @@ export function YearInOinkyPage(c: Context) {
     return c.html(
         <Layout>
             <h2>Highlights</h2>
-                <div class={cardGrid}>
-                    <Card label="Most kills" value={mostKillsMatch?.riotIdGameName + ": " + mostKillsMatch?.kills} />
-                    <Card label="Most assists" value={mostAssistsMatch?.riotIdGameName + ": " + mostAssistsMatch?.assists} />
-                    <Card label="Most towers" value={mostTurretsMatch?.riotIdGameName + ": " + mostTurretsMatch?.turretTakedowns} />
-                    <Card label="Most farm" value={mostFarmMatch?.riotIdGameName + ": " + (mostFarmMatch?.totalMinionsKilled ?? 0 + (mostFarmMatch?.totalAllyJungleMinionsKilled ?? 0) + (mostFarmMatch?.totalEnemyJungleMinionsKilled ?? 0) + (mostFarmMatch?.wardsKilled ?? 0))} />
-                    <Card label="Most counterjungle" value={mostCounterJungle?.riotIdGameName + ": " + mostCounterJungle?.totalEnemyJungleMinionsKilled} />
-                    <Card label="Most wards destroyed" value={mostWardsDestroyed?.riotIdGameName + ": " + mostWardsDestroyed?.wardsKilled} />
-                    <Card label="Most wards placed" value={mostWardsPlaced?.riotIdGameName + ": " + (mostWardsPlaced?.wardsPlaced ?? 0 + (mostWardsPlaced?.detectorWardsPlaced ?? 0))} />
-                </div>
+            <div class={cardGrid}>
+                <Card label="Most kills" value={mostKillsMatch?.riotIdGameName + ": " + mostKillsMatch?.kills} />
+                <Card label="Most assists" value={mostAssistsMatch?.riotIdGameName + ": " + mostAssistsMatch?.assists} />
+                <Card label="Most towers" value={mostTurretsMatch?.riotIdGameName + ": " + mostTurretsMatch?.turretTakedowns} />
+                <Card label="Most farm" value={mostFarmMatch?.riotIdGameName + ": " + (mostFarmMatch?.totalMinionsKilled ?? 0 + (mostFarmMatch?.totalAllyJungleMinionsKilled ?? 0) + (mostFarmMatch?.totalEnemyJungleMinionsKilled ?? 0) + (mostFarmMatch?.wardsKilled ?? 0))} />
+                <Card label="Most counterjungle" value={mostCounterJungle?.riotIdGameName + ": " + mostCounterJungle?.totalEnemyJungleMinionsKilled} />
+                <Card label="Most wards destroyed" value={mostWardsDestroyed?.riotIdGameName + ": " + mostWardsDestroyed?.wardsKilled} />
+                <Card label="Most wards placed" value={mostWardsPlaced?.riotIdGameName + ": " + (mostWardsPlaced?.wardsPlaced ?? 0 + (mostWardsPlaced?.detectorWardsPlaced ?? 0))} />
+            </div>
             <h2>Lowlights</h2>
             
             <div class={cardGrid}>

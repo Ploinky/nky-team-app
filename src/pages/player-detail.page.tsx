@@ -28,9 +28,9 @@ export function PlayerDetailPage(c: Context<BlankEnv, "/players/:puuid", BlankIn
       <h1>{player.name}</h1>
       <h2>Lifetime stats</h2>
       <div class={cardGrid}>
-        <Card label="total kills:" value={"" + pms.map(pm => pm.kills).reduce((pv, cv) => pv + cv)} />
-        <Card label="total deaths:" value={"" + pms.map(pm => pm.deaths).reduce((pv, cv) => pv + cv)} />
-        <Card label="total assists:" value={"" + pms.map(pm => pm.assists).reduce((pv, cv) => pv + cv)} />
+        <Card label="Total kills" value={"" + pms.map(pm => pm.kills).reduce((pv, cv) => pv + cv)} />
+        <Card label="Total deaths" value={"" + pms.map(pm => pm.deaths).reduce((pv, cv) => pv + cv)} />
+        <Card label="Total assists" value={"" + pms.map(pm => pm.assists).reduce((pv, cv) => pv + cv)} />
       </div>
     </Layout>
   )

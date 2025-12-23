@@ -35,6 +35,9 @@ export function round(num: number) {
 }
 
 export interface PlayerStats {
+    name: string
+    puuid: string
+    role: string
     gamesPlayed: number
     winPercentage: number
     totalKills: number
@@ -50,25 +53,34 @@ export interface PlayerStats {
     damageShare: number
     efficiency: number
     nexusTakedowns: number
+    tripleKills: number
+    quadraKills: number
+    pentaKills: number
 }
-export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID): PlayerStats {
-    const pms = matches.flatMap(m => m.matchData.info.participants).filter(mp => mp.puuid === playerId)
+export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID, role: string): PlayerStats {
+    const pms = matches.flatMap(m => m.matchData.info.participants).filter(mp => mp.puuid === playerId && (!role || mp.teamPosition === role))
     const stats = {
         gamesPlayed: pms.length,
         winPercentage: Math.round(pms.filter(m => m.win).length / pms.length * 100),
-        totalKills: pms.map(pm => pm.kills).reduce(collect),
-        totalDeaths: pms.map(pm => pm.deaths).reduce(collect),
-        totalAssists: pms.map(pm => pm.assists).reduce(collect),
+        totalKills: pms.map(pm => pm.kills).reduce(collect, 0),
+        totalDeaths: pms.map(pm => pm.deaths).reduce(collect, 0),
+        totalAssists: pms.map(pm => pm.assists).reduce(collect, 0),
         kda: 0,
-        kp: Math.round(pms.map(pm => pm.challenges.killParticipation).reduce(collect) / pms.length * 100),
-        damagePerMinute: round(pms.map(pm => pm.challenges.damagePerMinute).reduce(collect) / pms.length),
-        goldPerMinute: round(pms.map(pm => pm.challenges.goldPerMinute).reduce(collect) / pms.length),
-        visionScorePerMinute: round(pms.map(pm => pm.challenges.visionScorePerMinute).reduce(collect) / pms.length),
-        totalGold: pms.map(pm => pm.goldEarned).reduce(collect),
-        totalDamageToChampions: pms.map(pm => pm.totalDamageDealtToChampions).reduce(collect),
-        damageShare: Math.round(pms.map(pm => pm.challenges.teamDamagePercentage).reduce(collect) / pms.length * 100) ,
+        kp: Math.round(pms.map(pm => pm.challenges.killParticipation).reduce(collect, 0) / pms.length * 100),
+        damagePerMinute: round(pms.map(pm => pm.challenges.damagePerMinute).reduce(collect, 0) / pms.length),
+        goldPerMinute: round(pms.map(pm => pm.challenges.goldPerMinute).reduce(collect, 0) / pms.length),
+        visionScorePerMinute: round(pms.map(pm => pm.challenges.visionScorePerMinute).reduce(collect, 0) / pms.length),
+        totalGold: pms.map(pm => pm.goldEarned).reduce(collect, 0),
+        totalDamageToChampions: pms.map(pm => pm.totalDamageDealtToChampions).reduce(collect, 0),
+        damageShare: Math.round(pms.map(pm => pm.challenges.teamDamagePercentage).reduce(collect, 0) / pms.length * 100) ,
         efficiency: 0,
-        nexusTakedowns: pms.map(pm => pm.nexusKills).reduce(collect)
+        nexusTakedowns: pms.map(pm => pm.nexusKills).reduce(collect, 0),
+        tripleKills: pms.map(pm => pm.tripleKills).reduce(collect, 0),
+        quadraKills: pms.map(pm => pm.quadraKills).reduce(collect, 0),
+        pentaKills: pms.map(pm => pm.pentaKills).reduce(collect, 0),
+        name: pms[0].riotIdGameName,
+        role: role,
+        puuid: pms[0].puuid
     }
     stats.kda = round((stats.totalKills + stats.totalAssists) / stats.totalDeaths)
     stats.efficiency = round(stats.totalDamageToChampions / stats.totalGold)

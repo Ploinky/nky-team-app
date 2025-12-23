@@ -57,7 +57,7 @@ export interface PlayerStats {
     quadraKills: number
     pentaKills: number
 }
-export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID, role: string): PlayerStats {
+export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID, role?: string): PlayerStats {
     const pms = matches.flatMap(m => m.matchData.info.participants).filter(mp => mp.puuid === playerId && (!role || mp.teamPosition === role))
     const stats = {
         gamesPlayed: pms.length,
@@ -79,7 +79,7 @@ export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID, rol
         quadraKills: pms.map(pm => pm.quadraKills).reduce(collect, 0),
         pentaKills: pms.map(pm => pm.pentaKills).reduce(collect, 0),
         name: pms[0].riotIdGameName,
-        role: role,
+        role: role ?? '',
         puuid: pms[0].puuid
     }
     stats.kda = round((stats.totalKills + stats.totalAssists) / stats.totalDeaths)

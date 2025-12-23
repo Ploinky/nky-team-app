@@ -35,7 +35,7 @@ const global = css`
             grid-gap: 1rem;
             align-items: center;
 
-            grid-template-columns: auto auto auto 1fr auto;
+            grid-template-columns: auto auto auto auto auto auto 1fr auto;
 
             img {
               max-height: 3rem;
@@ -79,7 +79,6 @@ export function Layout(props: PropsWithChildren<LayoutProps>) {
     <html class={global}>
       <head>
         <title>NKY Team App</title>
-        <script src="/static/code.js" />
         <Style />
       </head>
       <body>
@@ -90,6 +89,9 @@ export function Layout(props: PropsWithChildren<LayoutProps>) {
             <span>Spring 2025 Starter League</span>
           </div>
           <a href="/">Home</a>
+          <a href="/players">Stats</a>
+          <a href="/matches">Matches</a>
+          <a href="/yearinoinky">Year In Oinky</a>
           <div></div>
           {props.addon}
         </nav>

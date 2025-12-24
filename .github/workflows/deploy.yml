@@ -22,4 +22,3 @@ jobs:
           source: "out/*,static"
           target: "/var/www/static"
           flatten: true
-'

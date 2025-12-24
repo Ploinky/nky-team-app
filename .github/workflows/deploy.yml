@@ -31,5 +31,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           source: "static"
           target: "/var/www/static"
-          strip-components: 1
 

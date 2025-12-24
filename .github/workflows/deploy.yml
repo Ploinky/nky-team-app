@@ -1,1 +1,11 @@
-
+name: Deploy
+on: [push]
+jobs:
+  Build-And-Deploy:
+    runs-on: ubuntu-slim
+    steps:
+      - run: curl -fsSL https://bun.sh/install | bash
+      - run: source ~/.bashrc
+      - name: Checkout
+        uses: actions/checkout@v6
+      - run: bun build.ts

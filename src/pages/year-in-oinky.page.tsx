@@ -25,6 +25,7 @@ export function YearInOinkyPage(c: Context) {
     const mostCounterJungle = oinkyMatches.sort((a, b) => b.totalEnemyJungleMinionsKilled - a.totalEnemyJungleMinionsKilled ).at(0);
     const mostWardsDestroyed = oinkyMatches.sort((a, b) => b.wardsKilled - a.wardsKilled ).at(0);
     const mostWardsPlaced = oinkyMatches.sort((a, b) => (b.wardsPlaced + b.detectorWardsPlaced) - (a.wardsPlaced + a.detectorWardsPlaced)).at(0);
+    const mostObjectivesStolen = oinkyMatches.sort((a, b) => b.objectivesStolen - a.objectivesStolen).at(0)
 
     const mostDeathsMatch = oinkyMatches.sort((a, b) => b.deaths - a.deaths).at(0);
     const leastVisionScore = oinkyMatches.sort((a, b) => (a.visionScore) - (b.visionScore)).at(0);
@@ -38,6 +39,7 @@ export function YearInOinkyPage(c: Context) {
                 <Card label="Most towers" value={mostTurretsMatch?.riotIdGameName + ": " + mostTurretsMatch?.turretTakedowns} />
                 <Card label="Most farm" value={mostFarmMatch?.riotIdGameName + ": " + (mostFarmMatch?.totalMinionsKilled ?? 0 + (mostFarmMatch?.totalAllyJungleMinionsKilled ?? 0) + (mostFarmMatch?.totalEnemyJungleMinionsKilled ?? 0) + (mostFarmMatch?.wardsKilled ?? 0))} />
                 <Card label="Most counterjungle" value={mostCounterJungle?.riotIdGameName + ": " + mostCounterJungle?.totalEnemyJungleMinionsKilled} />
+                <Card label="Most objectives stolen" value={mostObjectivesStolen?.riotIdGameName + ": " + mostObjectivesStolen?.objectivesStolen} />
                 <Card label="Most wards destroyed" value={mostWardsDestroyed?.riotIdGameName + ": " + mostWardsDestroyed?.wardsKilled} />
                 <Card label="Most wards placed" value={mostWardsPlaced?.riotIdGameName + ": " + (mostWardsPlaced?.wardsPlaced ?? 0 + (mostWardsPlaced?.detectorWardsPlaced ?? 0))} />
             </div>

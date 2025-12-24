@@ -19,5 +19,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "out,static"
+          source: "out/.,static"
           target: "/var/www/static"

@@ -89,8 +89,8 @@ export function Layout(props: PropsWithChildren<LayoutProps>) {
             <span>Spring 2025 Starter League</span>
           </div>
           <a href="/">Home</a>
-          <a href="/players">Stats</a>
-          <a href="/matches">Matches</a>
+          <a href="/players-overview">Stats</a>
+          <a href="/matches-overview">Matches</a>
           <a href="/yearinoinky">Year In Oinky</a>
           <div></div>
           {props.addon}

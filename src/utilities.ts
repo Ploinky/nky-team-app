@@ -79,7 +79,7 @@ export function getPlayerStatsFromMatches(matches: Match[], playerId: PUUID, rol
         quadraKills: pms.map(pm => pm.quadraKills).reduce(collect, 0),
         pentaKills: pms.map(pm => pm.pentaKills).reduce(collect, 0),
         name: pms[0].riotIdGameName,
-        role: role ?? '',
+        role: role ?? pms.at(0)?.teamPosition ?? '',
         puuid: pms[0].puuid
     }
     stats.kda = round((stats.totalKills + stats.totalAssists) / stats.totalDeaths)

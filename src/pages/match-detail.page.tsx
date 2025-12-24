@@ -65,6 +65,7 @@ export function MatchDetailPage(c: Context<BlankEnv, "/matches/:matchId", BlankI
       <Table<PlayerStats & {name: string}>
         columns={[
           {header: "Name", fun: (p) => p.name},
+          {header: "Role", fun: (p) => p.role},
           {header: "KDA", fun: (p) => "" + p.kda},
           {header: "KP%", fun: (p) => "" + p.kp + "%"},
           {header: "DS%", fun: (p) => "" + p.damageShare + "%"},

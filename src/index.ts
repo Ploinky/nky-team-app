@@ -14,14 +14,14 @@ import { oinky_players } from '../data/oinky-players'
 const app = new Hono()
 
 app.get('/', IndexPage)
-app.get('/players', PlayerStatsPage)
 app.get('/players/:puuid',
     ssgParams(() => oinky_players.map(p => ({puuid: p.puuid}))),
     PlayerDetailPage)
-app.get('/matches', MatchesPage)
+app.get('/players', PlayerStatsPage)
 app.get('/matches/:matchId',
     ssgParams(() =>  [...spring2025Split.matches, ...fall2025Split.matches].map(m => ({matchId: m.matchData.metadata.matchId}))),
     MatchDetailPage)
+app.get('/matches', MatchesPage)
 app.get('/yearinoinky', YearInOinkyPage)
 
 app.use('/static/*', async (c, next) => {

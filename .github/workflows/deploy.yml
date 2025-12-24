@@ -19,5 +19,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "out/*,out/matches/*, out/players/*,static"
+          source: "out/*,static"
           target: "/var/www/static"
+          flatten: true
+'

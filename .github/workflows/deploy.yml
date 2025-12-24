@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - run: curl -fsSL https://bun.sh/install | bash
-      - run: source ~/.bashrc
+      - run: source /home/runner/.bash_profile
       - name: Checkout
         uses: actions/checkout@v6
       - run: bun build.ts

@@ -10,6 +10,7 @@ import { ssgParams } from 'hono/ssg'
 import { spring2025Split } from '../data/2025spring/split'
 import { fall2025Split } from '../data/2025fall/split'
 import { oinky_players } from '../data/oinky-players'
+import { splits } from '../data/splits'
 
 const app = new Hono()
 
@@ -19,7 +20,7 @@ app.get('/players/:puuid',
     PlayerDetailPage)
 app.get('/players-overview', PlayerStatsPage)
 app.get('/matches/:matchId',
-    ssgParams(() =>  [...spring2025Split.matches, ...fall2025Split.matches].map(m => ({matchId: m.matchData.metadata.matchId}))),
+    ssgParams(() =>  splits.flatMap(s => s.matches).map(m => ({matchId: m.matchData.metadata.matchId}))),
     MatchDetailPage)
 app.get('/matches-overview', MatchesPage)
 app.get('/yearinoinky', YearInOinkyPage)

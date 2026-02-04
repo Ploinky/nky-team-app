@@ -24,7 +24,7 @@ export function IndexPage(c: Context) {
   const mostDeathsMatch = oinkyMatches.sort((a, b) => b.deaths - a.deaths).at(0);
   const mostTurretsMatch = oinkyMatches.sort((a, b) => b.turretTakedowns - a.turretTakedowns).at(0);
 
-  const allMatches = [...spring2025Split.matches, ...fall2025Split.matches, ...winter2025Split.matches].sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
+  const allMatches =splits.flatMap(s => s.matches).sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
 
   return c.html(
     <Layout>

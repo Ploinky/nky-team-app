@@ -3,11 +3,10 @@ import { Table } from "@/components/Table";
 import { isOinkyWin, isOinkyPlayer, getGoldDiff } from "@/utilities";
 import { Context } from "hono";
 import { Match } from "../../global";
-import { spring2025Split } from "../../data/2025spring/split";
-import { fall2025Split } from "../../data/2025fall/split";
+import { splits } from "../../data/splits";
 
 export function MatchesPage(c: Context) {
-      const allMatches = [...spring2025Split.matches, ...fall2025Split.matches].sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
+      const allMatches = splits.flatMap(s => s.matches).sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
     
     return c.html(
         <Layout>

@@ -9,6 +9,7 @@ import { css } from "hono/css"
 import { Match } from "../../global"
 import { spring2025Split } from "../../data/2025spring/split"
 import { fall2025Split } from "../../data/2025fall/split"
+import { winter2025Split } from "../../data/2025winter/split"
 
 const cardGrid = css`
   display: grid;
@@ -23,7 +24,7 @@ export function IndexPage(c: Context) {
   const mostDeathsMatch = oinkyMatches.sort((a, b) => b.deaths - a.deaths).at(0);
   const mostTurretsMatch = oinkyMatches.sort((a, b) => b.turretTakedowns - a.turretTakedowns).at(0);
 
-  const allMatches = [...spring2025Split.matches, ...fall2025Split.matches].sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
+  const allMatches = [...spring2025Split.matches, ...fall2025Split.matches, ...winter2025Split.matches].sort((a, b) => b.matchData.info.gameStartTimestamp - a.matchData.info.gameEndTimestamp)
 
   return c.html(
     <Layout>
